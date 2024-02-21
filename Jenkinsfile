@@ -15,7 +15,7 @@ pipeline {
                 script {
                     dir("terraform") {
                         // Use the Github credentials for Git checkout
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'lookatravi', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'GIT_USERNAME', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
                             git credentialsId: 'YourGitCredentialsId', url: 'https://github.com/lookatravi/terraform-jenkins-pipeline.git', branch: 'main'
                         }
                     }
