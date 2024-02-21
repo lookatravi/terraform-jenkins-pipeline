@@ -12,14 +12,16 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                 script{
-                        dir("terraform")
-                        {
-                            git "https://github.com/lookatravi/terraform-jenkins-pipeline.git"
+                script {
+                    dir("terraform") {
+                        // Use the Github credentials for Git checkout
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'lookatravi', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+                            git credentialsId: 'YourGitCredentialsId', url: 'https://github.com/lookatravi/terraform-jenkins-pipeline.git', branch: 'main'
                         }
                     }
                 }
             }
+        }
 
         stage('Plan') {
             steps {
